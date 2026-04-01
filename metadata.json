@@ -1,0 +1,5 @@
+{
+  "name": "C4D Plugin Architect",
+  "description": "Generate boilerplate Python code for Cinema 4D 2024 plugins.",
+  "requestFramePermissions": []
+}

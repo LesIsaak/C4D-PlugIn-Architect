@@ -230,6 +230,18 @@ if __name__ == "__main__":
     setMessages(prev => [...prev, { role: 'model', text: "Reset to standard boilerplate." }]);
   };
 
+  const handleDownload = () => {
+    const blob = new Blob([currentCode], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${config.name.toLowerCase() || 'plugin'}.pyp`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="h-screen bg-blueprint-bg text-blueprint-text font-sans selection:bg-blueprint-accent selection:text-blueprint-bg flex flex-col overflow-hidden">
       {/* Header */}
@@ -254,6 +266,13 @@ if __name__ == "__main__":
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? 'Copied' : 'Copy Code'}
+          </button>
+          <button 
+            onClick={handleDownload}
+            className="flex items-center gap-2 px-3 py-1.5 bg-blueprint-accent text-white border border-blueprint-accent/50 rounded hover:bg-blueprint-accent/90 transition-all text-[11px] font-semibold uppercase tracking-wide"
+          >
+            <Download size={14} />
+            Download .pyp
           </button>
         </div>
       </header>

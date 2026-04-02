@@ -232,28 +232,25 @@ if __name__ == "__main__":
 
   return (
     <div className="min-h-screen bg-blueprint-bg text-blueprint-text font-sans selection:bg-blueprint-accent selection:text-blueprint-bg flex flex-col">
-      {/* Header Grid */}
-      <header className="border-b border-blueprint-accent/30 p-6 flex justify-between items-center bg-blueprint-panel/80 backdrop-blur-md sticky top-0 z-50">
+      {/* Header */}
+      <header className="border-b border-blueprint-border p-3 flex justify-between items-center bg-blueprint-panel sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blueprint-accent/20 text-blueprint-accent border border-blueprint-accent/40 rounded-sm shadow-[0_0_15px_rgba(0,210,255,0.1)]">
-            <Cpu size={24} />
+          <div className="text-blueprint-accent">
+            <Cpu size={20} />
           </div>
-          <div>
-            <h1 className="text-xl font-bold tracking-tighter uppercase font-display text-blueprint-accent">C4D Plugin Architect</h1>
-            <p className="text-[10px] uppercase tracking-[0.2em] opacity-50 font-mono">Cinema 4D 2024 SDK Boilerplate</p>
-          </div>
+          <h1 className="text-sm font-bold tracking-tight uppercase text-blueprint-text">C4D.ARCHITECT</h1>
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           <button 
             onClick={() => setIsChatOpen(!isChatOpen)}
-            className={`flex items-center gap-2 px-4 py-2 border border-blueprint-accent transition-all text-xs uppercase font-bold tracking-widest ${isChatOpen ? 'bg-blueprint-accent/20 text-blueprint-accent shadow-[0_0_15px_rgba(0,210,255,0.2)]' : 'hover:bg-blueprint-accent/10'}`}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded transition-all text-[11px] font-semibold uppercase tracking-wide ${isChatOpen ? 'bg-blueprint-accent text-white' : 'bg-blueprint-border/30 text-blueprint-text-muted hover:text-blueprint-text hover:bg-blueprint-border/50'}`}
           >
             <Sparkles size={14} />
             AI Architect
           </button>
           <button 
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 border border-blueprint-accent hover:bg-blueprint-accent/10 transition-all text-xs uppercase font-bold tracking-widest"
+            className="flex items-center gap-2 px-3 py-1.5 bg-blueprint-border/30 border border-blueprint-border/50 text-blueprint-text rounded hover:bg-blueprint-border/50 transition-all text-[11px] font-semibold uppercase tracking-wide"
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? 'Copied' : 'Copy Code'}
@@ -263,49 +260,43 @@ if __name__ == "__main__":
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[400px_1fr_auto] overflow-hidden">
         {/* Sidebar Controls */}
-        <section className="border-r border-blueprint-accent/20 p-8 space-y-8 bg-blueprint-panel/40 overflow-y-auto backdrop-blur-sm">
+        <section className="border-r border-blueprint-border p-5 space-y-8 bg-blueprint-panel overflow-y-auto">
           <div className="space-y-6">
-            <div className="flex items-center gap-2 opacity-50">
-              <Settings size={14} className="text-blueprint-accent" />
-              <span className="text-[10px] uppercase font-bold tracking-widest">Configuration</span>
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin Name</label>
+            <div className="space-y-5">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-blueprint-text-muted">Plugin Name</label>
                 <input 
                   type="text"
                   value={config.name}
                   onChange={(e) => setConfig({ ...config, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-blueprint-accent/40 py-2 focus:outline-none font-mono text-sm focus:border-blueprint-accent transition-colors"
+                  className="w-full bg-blueprint-bg border border-blueprint-border rounded px-3 py-2 focus:outline-none font-mono text-xs focus:border-blueprint-accent transition-colors text-blueprint-text"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin ID</label>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-blueprint-text-muted">Plugin ID</label>
                 <input 
                   type="text"
                   value={config.id}
                   onChange={(e) => setConfig({ ...config, id: e.target.value })}
-                  className="w-full bg-transparent border-b border-blueprint-accent/40 py-2 focus:outline-none font-mono text-sm focus:border-blueprint-accent transition-colors"
+                  className="w-full bg-blueprint-bg border border-blueprint-border rounded px-3 py-2 focus:outline-none font-mono text-xs focus:border-blueprint-accent transition-colors text-blueprint-text"
                 />
-                <p className="text-[9px] opacity-40 mt-1">Get a unique ID from developers.maxon.net</p>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin Type</label>
-                <div className="grid grid-cols-2 gap-2 pt-2">
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-blueprint-text-muted">Plugin Type</label>
+                <div className="grid grid-cols-2 gap-2 pt-1">
                   {(['CommandData', 'ObjectData'] as PluginType[]).map((type) => (
                     <button
                       key={type}
                       onClick={() => {
                         setConfig({ ...config, type });
-                        setCustomCode(null); // Reset custom code when switching types
+                        setCustomCode(null);
                       }}
-                      className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider border transition-all ${
+                      className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider border rounded transition-all ${
                         config.type === type 
-                        ? 'bg-blueprint-accent/20 text-blueprint-accent border-blueprint-accent shadow-[0_0_10px_rgba(0,210,255,0.1)]' 
-                        : 'border-blueprint-accent/20 hover:border-blueprint-accent/60'
+                        ? 'bg-blueprint-accent text-white border-blueprint-accent' 
+                        : 'border-blueprint-border text-blueprint-text-muted hover:border-blueprint-text-muted/50 hover:text-blueprint-text'
                       }`}
                     >
                       {type}
@@ -314,73 +305,73 @@ if __name__ == "__main__":
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Description</label>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-blueprint-text-muted">Description</label>
                 <textarea 
                   value={config.description}
                   onChange={(e) => setConfig({ ...config, description: e.target.value })}
-                  className="w-full bg-transparent border border-blueprint-accent/20 p-3 focus:outline-none font-mono text-xs h-24 focus:border-blueprint-accent transition-colors"
+                  className="w-full bg-blueprint-bg border border-blueprint-border rounded px-3 py-2 focus:outline-none font-mono text-xs h-24 focus:border-blueprint-accent transition-colors text-blueprint-text resize-none"
                 />
               </div>
             </div>
           </div>
 
-          <div className="p-4 border border-dashed border-blueprint-accent/30 rounded-sm bg-blueprint-accent/5 space-y-3">
+          <div className="p-4 border border-blueprint-border rounded bg-blueprint-bg/30 space-y-3">
             <div className="flex items-center gap-2">
-              <Info size={14} className="opacity-50 text-blueprint-accent" />
-              <span className="text-[10px] font-bold uppercase tracking-widest">SDK Notes</span>
+              <Info size={14} className="text-blueprint-accent" />
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blueprint-text">SDK Notes</span>
             </div>
-            <p className="text-[11px] leading-relaxed opacity-70">
+            <p className="text-[10px] leading-relaxed text-blueprint-text-muted">
               Cinema 4D 2024 uses Python 3.11. Ensure your environment matches. 
-              Place the generated <code className="font-mono bg-blueprint-accent/10 px-1 text-blueprint-accent">.pyp</code> file in your plugins directory.
+              Place the generated <code className="font-mono bg-blueprint-bg px-1 rounded text-blueprint-text">.pyp</code> file in your plugins directory.
             </p>
           </div>
         </section>
 
         {/* Code Preview Area */}
-        <section className="bg-blueprint-code text-blueprint-text/80 p-0 flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-3 border-b border-blueprint-accent/10 bg-blueprint-panel/60">
+        <section className="bg-blueprint-bg text-blueprint-text/80 p-0 flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-2 border-b border-blueprint-border bg-blueprint-panel/30">
             <div className="flex items-center gap-3">
               <FileCode size={14} className="text-blueprint-accent" />
-              <span className="text-[10px] font-mono tracking-wider uppercase opacity-50">
-                {config.name.toLowerCase()}.pyp {customCode && <span className="text-yellow-400 ml-2">(AI MODIFIED)</span>}
+              <span className="text-[10px] font-mono tracking-wider uppercase text-blueprint-text-muted">
+                {config.name.toLowerCase()}.pyp {customCode && <span className="text-yellow-500 ml-2">(AI MODIFIED)</span>}
               </span>
             </div>
             <div className="flex items-center gap-4">
               {customCode && (
                 <button 
                   onClick={handleReset}
-                  className="flex items-center gap-1 text-[9px] uppercase font-bold tracking-widest text-red-400 hover:text-red-300 transition-colors"
+                  className="flex items-center gap-1 text-[9px] uppercase font-bold tracking-widest text-red-500 hover:text-red-400 transition-colors"
                 >
                   <RotateCcw size={12} />
-                  Reset to Boilerplate
+                  Reset
                 </button>
               )}
-              <div className="flex gap-1">
-                <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                <div className="w-2 h-2 rounded-full bg-green-500/50" />
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-blueprint-border" />
+                <div className="w-2.5 h-2.5 rounded-full bg-blueprint-border" />
+                <div className="w-2.5 h-2.5 rounded-full bg-blueprint-border" />
               </div>
             </div>
           </div>
           
-          <div className="flex-1 overflow-auto p-8 font-mono text-sm leading-relaxed custom-scrollbar">
+          <div className="flex-1 overflow-auto p-8 font-mono text-xs leading-relaxed custom-scrollbar">
             <pre className="whitespace-pre-wrap">
               {currentCode.split('\n').map((line, i) => (
                 <div key={i} className="flex gap-6 group">
-                  <span className="w-8 text-right opacity-20 select-none group-hover:opacity-40 transition-opacity">
+                  <span className="w-8 text-right text-blueprint-text-muted/20 select-none group-hover:text-blueprint-text-muted/40 transition-colors">
                     {i + 1}
                   </span>
                   <span className={
                     line.trim().startsWith('#') || line.trim().startsWith('"""') 
-                    ? 'text-slate-500 italic' 
+                    ? 'text-blueprint-text-muted/50 italic' 
                     : line.includes('class') || line.includes('def') || line.includes('import')
-                    ? 'text-blueprint-accent font-bold'
+                    ? 'text-white font-semibold'
                     : line.includes('c4d')
-                    ? 'text-cyan-400'
+                    ? 'text-blueprint-accent'
                     : line.includes('"') || line.includes("'")
-                    ? 'text-emerald-400'
-                    : 'text-blueprint-text/90'
+                    ? 'text-emerald-400/80'
+                    : 'text-blueprint-text/80'
                   }>
                     {line}
                   </span>
@@ -395,73 +386,70 @@ if __name__ == "__main__":
           {isChatOpen && (
             <motion.section 
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 450, opacity: 1 }}
+              animate={{ width: 400, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
-              className="border-l border-blueprint-accent/20 bg-blueprint-panel flex flex-col overflow-hidden relative shadow-2xl"
+              className="border-l border-blueprint-border bg-blueprint-panel flex flex-col overflow-hidden relative shadow-2xl"
             >
-              <div className="p-6 border-b border-blueprint-accent/30 flex items-center justify-between bg-blueprint-panel">
-                <div className="flex items-center gap-3">
-                  <Sparkles size={18} className="text-blueprint-accent" />
-                  <h2 className="text-sm font-bold uppercase tracking-widest text-blueprint-accent">AI Architect</h2>
+              <div className="p-4 border-b border-blueprint-border flex items-center justify-between bg-blueprint-panel">
+                <div className="flex items-center gap-2.5">
+                  <Sparkles size={16} className="text-blueprint-accent" />
+                  <h2 className="text-[11px] font-bold uppercase tracking-widest text-blueprint-text">PROPERTIES</h2>
                 </div>
                 <button 
                   onClick={() => setIsChatOpen(false)}
-                  className="p-1 hover:bg-blueprint-accent/10 rounded-sm transition-colors text-blueprint-accent"
+                  className="p-1 hover:bg-white/5 rounded transition-colors text-blueprint-text-muted"
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={18} />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar-light">
+              <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar-light">
                 {messages.map((msg, i) => (
                   <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                    <div className={`max-w-[90%] p-4 rounded-sm text-xs leading-relaxed ${
+                    <div className={`max-w-[90%] p-3.5 rounded text-[11px] leading-relaxed ${
                       msg.role === 'user' 
-                      ? 'bg-blueprint-accent/10 text-blueprint-accent border border-blueprint-accent/30' 
-                      : 'bg-blueprint-code text-blueprint-text border border-blueprint-accent/10'
+                      ? 'bg-blueprint-accent text-white font-medium' 
+                      : 'bg-blueprint-bg text-blueprint-text border border-blueprint-border'
                     }`}>
                       {msg.text.split('\n').map((line, j) => (
-                        <p key={j} className={line.startsWith('```') ? 'hidden' : ''}>
+                        <p key={j} className={line.startsWith('```') ? 'hidden' : 'mb-1 last:mb-0'}>
                           {line}
                         </p>
                       ))}
                       {msg.role === 'model' && extractCode(msg.text) && (
-                        <div className="mt-2 pt-2 border-t border-blueprint-accent/10 flex items-center gap-2 text-[10px] font-bold text-blueprint-accent uppercase">
-                          <Check size={12} />
-                          Code applied to editor
+                        <div className="mt-2 pt-2 border-t border-blueprint-border flex items-center gap-2 text-[9px] font-bold text-blueprint-accent uppercase">
+                          <Check size={10} />
+                          Editor Updated
                         </div>
                       )}
                     </div>
-                    <span className="text-[9px] uppercase font-bold tracking-tighter opacity-30 mt-2">
-                      {msg.role === 'user' ? 'You' : 'Architect'}
-                    </span>
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="flex items-center gap-2 text-blueprint-accent/50">
-                    <Loader2 size={14} className="animate-spin" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Architect is thinking...</span>
+                  <div className="flex items-center gap-2 text-blueprint-text-muted/50">
+                    <Loader2 size={12} className="animate-spin" />
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-blueprint-accent">Thinking...</span>
                   </div>
                 )}
                 <div ref={chatEndRef} />
               </div>
 
-              <div className="p-6 border-t border-blueprint-accent/20 bg-blueprint-panel/60">
+              <div className="p-5 border-t border-blueprint-border bg-blueprint-panel">
                 <div className="relative flex items-center">
                   <input 
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    placeholder="Describe a feature (e.g. 'Add a button to rename objects')..."
-                    className="w-full bg-blueprint-code border border-blueprint-accent/40 p-4 pr-12 focus:outline-none text-xs font-mono shadow-[4px_4px_0px_0px_rgba(0,210,255,0.3)] focus:shadow-[2px_2px_0px_0px_rgba(0,210,255,0.3)] transition-all text-blueprint-text placeholder:text-blueprint-text/30"
+                    placeholder="Ask for a feature..."
+                    className="w-full bg-blueprint-bg border border-blueprint-border rounded p-3.5 pr-12 focus:outline-none text-[11px] font-mono transition-all text-blueprint-text placeholder:text-blueprint-text-muted/30"
                   />
                   <button 
                     onClick={handleSendMessage}
                     disabled={isLoading}
-                    className="absolute right-4 p-2 text-blueprint-accent hover:scale-110 transition-transform disabled:opacity-50"
+                    className="absolute right-3.5 p-1.5 text-blueprint-accent hover:scale-110 transition-transform disabled:opacity-50"
                   >
-                    <Send size={18} />
+                    <Send size={16} />
                   </button>
                 </div>
               </div>

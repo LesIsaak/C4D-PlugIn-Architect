@@ -1,29 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Inter", sans-serif;
   
-  --color-blueprint-bg: #020617;
-  --color-blueprint-panel: #070e1e;
-  --color-blueprint-accent: #00d2ff;
-  --color-blueprint-text: #94a3b8;
-  --color-blueprint-code: #010409;
-  --color-blueprint-line: rgba(0, 210, 255, 0.03);
-  --color-blueprint-line-strong: rgba(0, 210, 255, 0.07);
+  --color-blueprint-bg: #05070a;
+  --color-blueprint-panel: #0f172a;
+  --color-blueprint-accent: #0ea5e9;
+  --color-blueprint-text: #f8fafc;
+  --color-blueprint-text-muted: #64748b;
+  --color-blueprint-code: #05070a;
+  --color-blueprint-border: #1e293b;
 }
 
 @layer base {
   body {
-    @apply bg-blueprint-bg text-blueprint-text;
-    background-image: 
-      linear-gradient(var(--color-blueprint-line-strong) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-blueprint-line-strong) 1px, transparent 1px),
-      linear-gradient(var(--color-blueprint-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-blueprint-line) 1px, transparent 1px);
-    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-attachment: fixed;
+    @apply bg-blueprint-bg text-blueprint-text antialiased;
   }
 }

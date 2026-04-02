@@ -231,29 +231,29 @@ if __name__ == "__main__":
   };
 
   return (
-    <div className="min-h-screen bg-[#E4E3E0] text-[#141414] font-sans selection:bg-[#141414] selection:text-[#E4E3E0] flex flex-col">
+    <div className="min-h-screen bg-blueprint-bg text-blueprint-text font-sans selection:bg-blueprint-accent selection:text-blueprint-bg flex flex-col">
       {/* Header Grid */}
-      <header className="border-b border-[#141414] p-6 flex justify-between items-center bg-white/50 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-blueprint-accent/30 p-6 flex justify-between items-center bg-blueprint-panel/80 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-[#141414] text-white rounded-sm">
+          <div className="p-2 bg-blueprint-accent text-blueprint-bg rounded-sm shadow-[0_0_15px_rgba(0,210,255,0.3)]">
             <Cpu size={24} />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tighter uppercase italic font-serif">C4D Plugin Architect</h1>
+            <h1 className="text-xl font-bold tracking-tighter uppercase font-display text-blueprint-accent">C4D Plugin Architect</h1>
             <p className="text-[10px] uppercase tracking-[0.2em] opacity-50 font-mono">Cinema 4D 2024 SDK Boilerplate</p>
           </div>
         </div>
         <div className="flex gap-4">
           <button 
             onClick={() => setIsChatOpen(!isChatOpen)}
-            className={`flex items-center gap-2 px-4 py-2 border border-[#141414] transition-all text-xs uppercase font-bold tracking-widest ${isChatOpen ? 'bg-[#141414] text-white' : 'hover:bg-[#141414] hover:text-[#E4E3E0]'}`}
+            className={`flex items-center gap-2 px-4 py-2 border border-blueprint-accent transition-all text-xs uppercase font-bold tracking-widest ${isChatOpen ? 'bg-blueprint-accent text-blueprint-bg shadow-[0_0_10px_rgba(0,210,255,0.4)]' : 'hover:bg-blueprint-accent hover:text-blueprint-bg'}`}
           >
             <Sparkles size={14} />
             AI Architect
           </button>
           <button 
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 border border-[#141414] hover:bg-[#141414] hover:text-[#E4E3E0] transition-all text-xs uppercase font-bold tracking-widest"
+            className="flex items-center gap-2 px-4 py-2 border border-blueprint-accent hover:bg-blueprint-accent hover:text-blueprint-bg transition-all text-xs uppercase font-bold tracking-widest"
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? 'Copied' : 'Copy Code'}
@@ -263,37 +263,37 @@ if __name__ == "__main__":
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[400px_1fr_auto] overflow-hidden">
         {/* Sidebar Controls */}
-        <section className="border-r border-[#141414] p-8 space-y-8 bg-white/30 overflow-y-auto">
+        <section className="border-r border-blueprint-accent/20 p-8 space-y-8 bg-blueprint-panel/40 overflow-y-auto backdrop-blur-sm">
           <div className="space-y-6">
             <div className="flex items-center gap-2 opacity-50">
-              <Settings size={14} />
+              <Settings size={14} className="text-blueprint-accent" />
               <span className="text-[10px] uppercase font-bold tracking-widest">Configuration</span>
             </div>
 
             <div className="space-y-4">
               <div className="space-y-1">
-                <label className="text-[11px] font-serif italic opacity-60 uppercase">Plugin Name</label>
+                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin Name</label>
                 <input 
                   type="text"
                   value={config.name}
                   onChange={(e) => setConfig({ ...config, name: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#141414] py-2 focus:outline-none font-mono text-sm"
+                  className="w-full bg-transparent border-b border-blueprint-accent/40 py-2 focus:outline-none font-mono text-sm focus:border-blueprint-accent transition-colors"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-serif italic opacity-60 uppercase">Plugin ID</label>
+                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin ID</label>
                 <input 
                   type="text"
                   value={config.id}
                   onChange={(e) => setConfig({ ...config, id: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#141414] py-2 focus:outline-none font-mono text-sm"
+                  className="w-full bg-transparent border-b border-blueprint-accent/40 py-2 focus:outline-none font-mono text-sm focus:border-blueprint-accent transition-colors"
                 />
                 <p className="text-[9px] opacity-40 mt-1">Get a unique ID from developers.maxon.net</p>
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-serif italic opacity-60 uppercase">Plugin Type</label>
+                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Plugin Type</label>
                 <div className="grid grid-cols-2 gap-2 pt-2">
                   {(['CommandData', 'ObjectData'] as PluginType[]).map((type) => (
                     <button
@@ -304,8 +304,8 @@ if __name__ == "__main__":
                       }}
                       className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider border transition-all ${
                         config.type === type 
-                        ? 'bg-[#141414] text-[#E4E3E0] border-[#141414]' 
-                        : 'border-[#141414]/20 hover:border-[#141414]'
+                        ? 'bg-blueprint-accent text-blueprint-bg border-blueprint-accent' 
+                        : 'border-blueprint-accent/20 hover:border-blueprint-accent/60'
                       }`}
                     >
                       {type}
@@ -315,35 +315,35 @@ if __name__ == "__main__":
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-serif italic opacity-60 uppercase">Description</label>
+                <label className="text-[11px] font-display font-medium opacity-60 uppercase tracking-wider text-blueprint-accent">Description</label>
                 <textarea 
                   value={config.description}
                   onChange={(e) => setConfig({ ...config, description: e.target.value })}
-                  className="w-full bg-transparent border border-[#141414]/20 p-3 focus:outline-none font-mono text-xs h-24 focus:border-[#141414]"
+                  className="w-full bg-transparent border border-blueprint-accent/20 p-3 focus:outline-none font-mono text-xs h-24 focus:border-blueprint-accent transition-colors"
                 />
               </div>
             </div>
           </div>
 
-          <div className="p-4 border border-dashed border-[#141414]/30 rounded-sm bg-[#141414]/5 space-y-3">
+          <div className="p-4 border border-dashed border-blueprint-accent/30 rounded-sm bg-blueprint-accent/5 space-y-3">
             <div className="flex items-center gap-2">
-              <Info size={14} className="opacity-50" />
+              <Info size={14} className="opacity-50 text-blueprint-accent" />
               <span className="text-[10px] font-bold uppercase tracking-widest">SDK Notes</span>
             </div>
             <p className="text-[11px] leading-relaxed opacity-70">
               Cinema 4D 2024 uses Python 3.11. Ensure your environment matches. 
-              Place the generated <code className="font-mono bg-white px-1">.pyp</code> file in your plugins directory.
+              Place the generated <code className="font-mono bg-blueprint-accent/10 px-1 text-blueprint-accent">.pyp</code> file in your plugins directory.
             </p>
           </div>
         </section>
 
         {/* Code Preview Area */}
-        <section className="bg-[#1a1a1a] text-[#d4d4d4] p-0 flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-3 border-b border-white/10 bg-[#252525]">
+        <section className="bg-blueprint-code text-blueprint-text/80 p-0 flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between px-6 py-3 border-b border-blueprint-accent/10 bg-blueprint-panel/60">
             <div className="flex items-center gap-3">
-              <FileCode size={14} className="text-blue-400" />
+              <FileCode size={14} className="text-blueprint-accent" />
               <span className="text-[10px] font-mono tracking-wider uppercase opacity-50">
-                {config.name.toLowerCase()}.pyp {customCode && <span className="text-yellow-500 ml-2">(AI MODIFIED)</span>}
+                {config.name.toLowerCase()}.pyp {customCode && <span className="text-yellow-400 ml-2">(AI MODIFIED)</span>}
               </span>
             </div>
             <div className="flex items-center gap-4">
@@ -373,12 +373,12 @@ if __name__ == "__main__":
                   </span>
                   <span className={
                     line.trim().startsWith('#') || line.trim().startsWith('"""') 
-                    ? 'text-green-500/70 italic' 
+                    ? 'text-green-400/70 italic' 
                     : line.includes('class') || line.includes('def') || line.includes('import')
-                    ? 'text-purple-400'
+                    ? 'text-blueprint-accent'
                     : line.includes('c4d')
-                    ? 'text-blue-300'
-                    : 'text-gray-300'
+                    ? 'text-cyan-300'
+                    : 'text-blueprint-text/90'
                   }>
                     {line}
                   </span>
@@ -395,11 +395,11 @@ if __name__ == "__main__":
               initial={{ width: 0, opacity: 0 }}
               animate={{ width: 450, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
-              className="border-l border-[#141414] bg-white flex flex-col overflow-hidden relative shadow-2xl"
+              className="border-l border-blueprint-accent/20 bg-blueprint-panel flex flex-col overflow-hidden relative shadow-2xl"
             >
-              <div className="p-6 border-b border-[#141414] flex items-center justify-between bg-[#141414] text-white">
+              <div className="p-6 border-b border-blueprint-accent/30 flex items-center justify-between bg-blueprint-accent text-blueprint-bg">
                 <div className="flex items-center gap-3">
-                  <Sparkles size={18} className="text-yellow-400" />
+                  <Sparkles size={18} />
                   <h2 className="text-sm font-bold uppercase tracking-widest">AI Architect</h2>
                 </div>
                 <button 
@@ -415,8 +415,8 @@ if __name__ == "__main__":
                   <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                     <div className={`max-w-[90%] p-4 rounded-sm text-xs leading-relaxed ${
                       msg.role === 'user' 
-                      ? 'bg-[#141414] text-white' 
-                      : 'bg-[#f0f0f0] text-[#141414] border border-[#141414]/10'
+                      ? 'bg-blueprint-accent text-blueprint-bg' 
+                      : 'bg-blueprint-code text-blueprint-text border border-blueprint-accent/10'
                     }`}>
                       {msg.text.split('\n').map((line, j) => (
                         <p key={j} className={line.startsWith('```') ? 'hidden' : ''}>
@@ -424,7 +424,7 @@ if __name__ == "__main__":
                         </p>
                       ))}
                       {msg.role === 'model' && extractCode(msg.text) && (
-                        <div className="mt-2 pt-2 border-t border-[#141414]/10 flex items-center gap-2 text-[10px] font-bold text-green-600 uppercase">
+                        <div className="mt-2 pt-2 border-t border-blueprint-accent/10 flex items-center gap-2 text-[10px] font-bold text-blueprint-accent uppercase">
                           <Check size={12} />
                           Code applied to editor
                         </div>
@@ -436,7 +436,7 @@ if __name__ == "__main__":
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="flex items-center gap-2 text-[#141414]/50">
+                  <div className="flex items-center gap-2 text-blueprint-accent/50">
                     <Loader2 size={14} className="animate-spin" />
                     <span className="text-[10px] font-bold uppercase tracking-widest">Architect is thinking...</span>
                   </div>
@@ -444,7 +444,7 @@ if __name__ == "__main__":
                 <div ref={chatEndRef} />
               </div>
 
-              <div className="p-6 border-t border-[#141414] bg-[#f9f9f9]">
+              <div className="p-6 border-t border-blueprint-accent/20 bg-blueprint-panel/60">
                 <div className="relative flex items-center">
                   <input 
                     type="text"
@@ -452,12 +452,12 @@ if __name__ == "__main__":
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                     placeholder="Describe a feature (e.g. 'Add a button to rename objects')..."
-                    className="w-full bg-white border border-[#141414] p-4 pr-12 focus:outline-none text-xs font-mono shadow-[4px_4px_0px_0px_rgba(20,20,20,1)] focus:shadow-[2px_2px_0px_0px_rgba(20,20,20,1)] transition-all"
+                    className="w-full bg-blueprint-code border border-blueprint-accent/40 p-4 pr-12 focus:outline-none text-xs font-mono shadow-[4px_4px_0px_0px_rgba(0,210,255,0.3)] focus:shadow-[2px_2px_0px_0px_rgba(0,210,255,0.3)] transition-all text-blueprint-text placeholder:text-blueprint-text/30"
                   />
                   <button 
                     onClick={handleSendMessage}
                     disabled={isLoading}
-                    className="absolute right-4 p-2 text-[#141414] hover:scale-110 transition-transform disabled:opacity-50"
+                    className="absolute right-4 p-2 text-blueprint-accent hover:scale-110 transition-transform disabled:opacity-50"
                   >
                     <Send size={18} />
                   </button>
@@ -474,14 +474,15 @@ if __name__ == "__main__":
           height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #1a1a1a;
+          background: #050f1d;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #333;
+          background: #0d2a50;
           border-radius: 4px;
+          border: 1px solid rgba(0, 210, 255, 0.1);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #444;
+          background: #00d2ff22;
         }
 
         .custom-scrollbar-light::-webkit-scrollbar {
@@ -491,11 +492,11 @@ if __name__ == "__main__":
           background: transparent;
         }
         .custom-scrollbar-light::-webkit-scrollbar-thumb {
-          background: #ddd;
+          background: rgba(0, 210, 255, 0.2);
           border-radius: 3px;
         }
         .custom-scrollbar-light::-webkit-scrollbar-thumb:hover {
-          background: #ccc;
+          background: rgba(0, 210, 255, 0.4);
         }
       `}} />
     </div>

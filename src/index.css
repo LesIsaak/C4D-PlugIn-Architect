@@ -1,8 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-serif: "Playfair Display", serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-blueprint-bg: #0a1e3b;
+  --color-blueprint-panel: #0d2a50;
+  --color-blueprint-accent: #00d2ff;
+  --color-blueprint-text: #e0f2fe;
+  --color-blueprint-code: #050f1d;
+  --color-blueprint-line: rgba(0, 210, 255, 0.2);
+}
+
+@layer base {
+  body {
+    @apply bg-blueprint-bg text-blueprint-text;
+    background-image: 
+      linear-gradient(var(--color-blueprint-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-blueprint-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
 }

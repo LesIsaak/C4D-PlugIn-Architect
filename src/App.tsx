@@ -231,7 +231,7 @@ if __name__ == "__main__":
   };
 
   return (
-    <div className="min-h-screen bg-blueprint-bg text-blueprint-text font-sans selection:bg-blueprint-accent selection:text-blueprint-bg flex flex-col">
+    <div className="h-screen bg-blueprint-bg text-blueprint-text font-sans selection:bg-blueprint-accent selection:text-blueprint-bg flex flex-col overflow-hidden">
       {/* Header */}
       <header className="border-b border-blueprint-border p-3 flex justify-between items-center bg-blueprint-panel sticky top-0 z-50">
         <div className="flex items-center gap-3">
@@ -260,7 +260,7 @@ if __name__ == "__main__":
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-[400px_1fr_auto] overflow-hidden">
         {/* Sidebar Controls */}
-        <section className="border-r border-blueprint-border p-5 space-y-8 bg-blueprint-panel overflow-y-auto">
+        <section className="border-r border-blueprint-border p-5 space-y-8 bg-blueprint-panel overflow-y-auto custom-scrollbar">
           <div className="space-y-6">
             <div className="space-y-5">
               <div className="space-y-1.5">
@@ -403,7 +403,7 @@ if __name__ == "__main__":
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar-light">
+              <div className="flex-1 overflow-y-auto p-5 space-y-5 custom-scrollbar">
                 {messages.map((msg, i) => (
                   <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                     <div className={`max-w-[90%] p-3.5 rounded text-[11px] leading-relaxed ${
@@ -464,31 +464,17 @@ if __name__ == "__main__":
           height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: var(--color-blueprint-code);
+          background: var(--color-blueprint-bg);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: var(--color-blueprint-panel);
+          background: var(--color-blueprint-border);
           border-radius: 4px;
-          border: 1px solid var(--color-blueprint-line-strong);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #00d2ff22;
+          background: var(--color-blueprint-accent);
+          opacity: 0.5;
         }
-
-        .custom-scrollbar-light::-webkit-scrollbar {
-          width: 6px;
-        }
-        .custom-scrollbar-light::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar-light::-webkit-scrollbar-thumb {
-          background: rgba(0, 210, 255, 0.2);
-          border-radius: 3px;
-        }
-        .custom-scrollbar-light::-webkit-scrollbar-thumb:hover {
-          background: rgba(0, 210, 255, 0.4);
-        }
-      `}} />
+`}} />
     </div>
   );
 }

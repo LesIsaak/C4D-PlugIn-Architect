@@ -6,20 +6,24 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-display: "Space Grotesk", sans-serif;
   
-  --color-blueprint-bg: #0a1e3b;
-  --color-blueprint-panel: #0d2a50;
+  --color-blueprint-bg: #020617;
+  --color-blueprint-panel: #070e1e;
   --color-blueprint-accent: #00d2ff;
-  --color-blueprint-text: #e0f2fe;
-  --color-blueprint-code: #050f1d;
-  --color-blueprint-line: rgba(0, 210, 255, 0.2);
+  --color-blueprint-text: #94a3b8;
+  --color-blueprint-code: #010409;
+  --color-blueprint-line: rgba(0, 210, 255, 0.03);
+  --color-blueprint-line-strong: rgba(0, 210, 255, 0.07);
 }
 
 @layer base {
   body {
     @apply bg-blueprint-bg text-blueprint-text;
     background-image: 
+      linear-gradient(var(--color-blueprint-line-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-blueprint-line-strong) 1px, transparent 1px),
       linear-gradient(var(--color-blueprint-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--color-blueprint-line) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-attachment: fixed;
   }
 }

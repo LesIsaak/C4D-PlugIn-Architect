@@ -235,7 +235,7 @@ if __name__ == "__main__":
       {/* Header Grid */}
       <header className="border-b border-blueprint-accent/30 p-6 flex justify-between items-center bg-blueprint-panel/80 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blueprint-accent text-blueprint-bg rounded-sm shadow-[0_0_15px_rgba(0,210,255,0.3)]">
+          <div className="p-2 bg-blueprint-accent/20 text-blueprint-accent border border-blueprint-accent/40 rounded-sm shadow-[0_0_15px_rgba(0,210,255,0.1)]">
             <Cpu size={24} />
           </div>
           <div>
@@ -246,14 +246,14 @@ if __name__ == "__main__":
         <div className="flex gap-4">
           <button 
             onClick={() => setIsChatOpen(!isChatOpen)}
-            className={`flex items-center gap-2 px-4 py-2 border border-blueprint-accent transition-all text-xs uppercase font-bold tracking-widest ${isChatOpen ? 'bg-blueprint-accent text-blueprint-bg shadow-[0_0_10px_rgba(0,210,255,0.4)]' : 'hover:bg-blueprint-accent hover:text-blueprint-bg'}`}
+            className={`flex items-center gap-2 px-4 py-2 border border-blueprint-accent transition-all text-xs uppercase font-bold tracking-widest ${isChatOpen ? 'bg-blueprint-accent/20 text-blueprint-accent shadow-[0_0_15px_rgba(0,210,255,0.2)]' : 'hover:bg-blueprint-accent/10'}`}
           >
             <Sparkles size={14} />
             AI Architect
           </button>
           <button 
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 border border-blueprint-accent hover:bg-blueprint-accent hover:text-blueprint-bg transition-all text-xs uppercase font-bold tracking-widest"
+            className="flex items-center gap-2 px-4 py-2 border border-blueprint-accent hover:bg-blueprint-accent/10 transition-all text-xs uppercase font-bold tracking-widest"
           >
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? 'Copied' : 'Copy Code'}
@@ -304,7 +304,7 @@ if __name__ == "__main__":
                       }}
                       className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider border transition-all ${
                         config.type === type 
-                        ? 'bg-blueprint-accent text-blueprint-bg border-blueprint-accent' 
+                        ? 'bg-blueprint-accent/20 text-blueprint-accent border-blueprint-accent shadow-[0_0_10px_rgba(0,210,255,0.1)]' 
                         : 'border-blueprint-accent/20 hover:border-blueprint-accent/60'
                       }`}
                     >
@@ -373,11 +373,13 @@ if __name__ == "__main__":
                   </span>
                   <span className={
                     line.trim().startsWith('#') || line.trim().startsWith('"""') 
-                    ? 'text-green-400/70 italic' 
+                    ? 'text-slate-500 italic' 
                     : line.includes('class') || line.includes('def') || line.includes('import')
-                    ? 'text-blueprint-accent'
+                    ? 'text-blueprint-accent font-bold'
                     : line.includes('c4d')
-                    ? 'text-cyan-300'
+                    ? 'text-cyan-400'
+                    : line.includes('"') || line.includes("'")
+                    ? 'text-emerald-400'
                     : 'text-blueprint-text/90'
                   }>
                     {line}
@@ -397,14 +399,14 @@ if __name__ == "__main__":
               exit={{ width: 0, opacity: 0 }}
               className="border-l border-blueprint-accent/20 bg-blueprint-panel flex flex-col overflow-hidden relative shadow-2xl"
             >
-              <div className="p-6 border-b border-blueprint-accent/30 flex items-center justify-between bg-blueprint-accent text-blueprint-bg">
+              <div className="p-6 border-b border-blueprint-accent/30 flex items-center justify-between bg-blueprint-panel">
                 <div className="flex items-center gap-3">
-                  <Sparkles size={18} />
-                  <h2 className="text-sm font-bold uppercase tracking-widest">AI Architect</h2>
+                  <Sparkles size={18} className="text-blueprint-accent" />
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-blueprint-accent">AI Architect</h2>
                 </div>
                 <button 
                   onClick={() => setIsChatOpen(false)}
-                  className="p-1 hover:bg-white/10 rounded-sm transition-colors"
+                  className="p-1 hover:bg-blueprint-accent/10 rounded-sm transition-colors text-blueprint-accent"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -415,7 +417,7 @@ if __name__ == "__main__":
                   <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                     <div className={`max-w-[90%] p-4 rounded-sm text-xs leading-relaxed ${
                       msg.role === 'user' 
-                      ? 'bg-blueprint-accent text-blueprint-bg' 
+                      ? 'bg-blueprint-accent/10 text-blueprint-accent border border-blueprint-accent/30' 
                       : 'bg-blueprint-code text-blueprint-text border border-blueprint-accent/10'
                     }`}>
                       {msg.text.split('\n').map((line, j) => (
@@ -474,12 +476,12 @@ if __name__ == "__main__":
           height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #050f1d;
+          background: var(--color-blueprint-code);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #0d2a50;
+          background: var(--color-blueprint-panel);
           border-radius: 4px;
-          border: 1px solid rgba(0, 210, 255, 0.1);
+          border: 1px solid var(--color-blueprint-line-strong);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
           background: #00d2ff22;
